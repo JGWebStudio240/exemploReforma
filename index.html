@@ -1,0 +1,882 @@
+﻿<!doctype html>
+<html lang="pt-BR" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reformas Pro — Transformamos Seu Espaço</title>
+    <meta name="description" content="Reformas residenciais e comerciais com qualidade, pontualidade e preço justo. Solicite seu orçamento gratuito!">
+    <meta name="keywords" content="reformas, construção, pintura, elétrica, hidráulica, acabamento, reforma residencial, reforma comercial">
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+    <script src="/_sdk/element_sdk.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&amp;family=Playfair+Display:wght@700;800&amp;display=swap" rel="stylesheet">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .app-root {
+            font-family: 'DM Sans', sans-serif;
+            height: 100%;
+            overflow-x: hidden;
+            overflow-y: auto;
+            width: 100%;
+        }
+
+        .heading-font {
+            font-family: 'Playfair Display', Georgia, serif;
+        }
+
+        /* Animations */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideRight {
+            from {
+                opacity: 0;
+                transform: translateX(-60px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.85);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes pulse-ring {
+            0% {
+                transform: scale(1);
+                opacity: 0.6;
+            }
+
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        .anim-fade-up {
+            opacity: 0;
+        }
+
+            .anim-fade-up.visible {
+                animation: fadeUp 0.7s ease forwards;
+            }
+
+        .anim-slide-right {
+            opacity: 0;
+        }
+
+            .anim-slide-right.visible {
+                animation: slideRight 0.7s ease forwards;
+            }
+
+        .anim-scale-in {
+            opacity: 0;
+        }
+
+            .anim-scale-in.visible {
+                animation: scaleIn 0.6s ease forwards;
+            }
+
+        .delay-1 {
+            animation-delay: 0.1s !important;
+        }
+
+        .delay-2 {
+            animation-delay: 0.2s !important;
+        }
+
+        .delay-3 {
+            animation-delay: 0.3s !important;
+        }
+
+        .delay-4 {
+            animation-delay: 0.4s !important;
+        }
+
+        .delay-5 {
+            animation-delay: 0.5s !important;
+        }
+
+        .delay-6 {
+            animation-delay: 0.6s !important;
+        }
+
+        .delay-7 {
+            animation-delay: 0.7s !important;
+        }
+
+        .delay-8 {
+            animation-delay: 0.8s !important;
+        }
+
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 1000;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #25D366;
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+            animation: float 3s ease-in-out infinite;
+            transition: transform 0.2s;
+        }
+
+            .whatsapp-btn:hover {
+                transform: scale(1.1);
+            }
+
+            .whatsapp-btn::before {
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+                background: #25D366;
+                animation: pulse-ring 2s ease-out infinite;
+            }
+
+        .nav-link {
+            position: relative;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+            .nav-link::after {
+                content: '';
+                position: absolute;
+                bottom: -4px;
+                left: 0;
+                width: 0;
+                height: 2px;
+                transition: width 0.3s;
+            }
+
+            .nav-link:hover::after, .nav-link.active::after {
+                width: 100%;
+            }
+
+        .gallery-item {
+            overflow: hidden;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.4s, box-shadow 0.4s;
+        }
+
+            .gallery-item:hover {
+                transform: translateY(-6px);
+                box-shadow: 0 16px 40px rgba(0,0,0,0.15);
+            }
+
+        .gallery-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.08);
+        }
+
+        .service-card {
+            padding: 32px 24px;
+            border-radius: 16px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+            .service-card:hover {
+                transform: translateY(-8px);
+                box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            }
+
+        .counter {
+            font-variant-numeric: tabular-nums;
+        }
+
+        .section-page {
+            display: none;
+        }
+
+            .section-page.active-page {
+                display: block;
+            }
+
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+        }
+
+            .mobile-menu.open {
+                transform: translateX(0);
+            }
+
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            background: rgba(0,0,0,0.9);
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+            .lightbox.show {
+                display: flex;
+                animation: fadeIn 0.3s ease;
+            }
+
+            .lightbox img {
+                max-width: 90%;
+                max-height: 85%;
+                border-radius: 8px;
+            }
+
+        input:focus, textarea:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(193,127,59,0.3);
+        }
+
+        .hero-parallax {
+            transition: transform 0.1s linear;
+        }
+
+        /* Smooth scroll within container */
+        .app-root {
+            scroll-behavior: smooth;
+        }
+    </style>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+    </style>
+    <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+</head>
+<body class="h-full">
+    <div class="app-root" id="app-root">
+        <!-- NAVBAR -->
+        <nav id="navbar" style="background: #1a1a1a;" class="fixed top-0 left-0 w-full z-50 transition-all duration-300">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16 sm:h-20">
+                <div class="flex items-center gap-2">
+                    <div style="background: #C17F3B;" class="w-9 h-9 rounded-lg flex items-center justify-center">
+                        <i data-lucide="hammer" style="color: #1a1a1a;" class="w-5 h-5"></i>
+                    </div><span id="nav-company" class="heading-font text-xl font-bold" style="color: #F5F0E8;">Reformas Pro</span>
+                </div>
+                <div class="hidden md:flex items-center gap-8">
+                    <span class="nav-link text-sm font-medium active" style="color: #F5F0E8;" data-page="inicio" onclick="navigateTo('inicio')">Início</span> <span class="nav-link text-sm font-medium" style="color: #F5F0E8;" data-page="servicos" onclick="navigateTo('servicos')">Serviços</span> <span class="nav-link text-sm font-medium" style="color: #F5F0E8;" data-page="contato" onclick="navigateTo('contato')">Contato</span> <a id="nav-cta" href="#" onclick="navigateTo('contato'); return false;" style="background: #C17F3B; color: #1a1a1a;" class="px-5 py-2 rounded-full text-sm font-bold hover:opacity-90 transition">Orçamento Grátis</a>
+                </div><button id="menu-toggle" class="md:hidden" style="color: #F5F0E8;" onclick="toggleMobileMenu()"> <i data-lucide="menu" class="w-6 h-6"></i> </button>
+            </div>
+        </nav><!-- MOBILE MENU -->
+        <div id="mobile-menu" class="mobile-menu fixed top-0 right-0 w-64 z-50" style="background: #1a1a1a; height: 100%;">
+            <div class="p-6">
+                <button onclick="toggleMobileMenu()" style="color: #F5F0E8;" class="mb-8"><i data-lucide="x" class="w-6 h-6"></i></button>
+                <div class="flex flex-col gap-6">
+                    <span class="nav-link text-lg font-medium" style="color: #F5F0E8;" data-page="inicio" onclick="navigateTo('inicio'); toggleMobileMenu();">Início</span> <span class="nav-link text-lg font-medium" style="color: #F5F0E8;" data-page="servicos" onclick="navigateTo('servicos'); toggleMobileMenu();">Serviços</span> <span class="nav-link text-lg font-medium" style="color: #F5F0E8;" data-page="contato" onclick="navigateTo('contato'); toggleMobileMenu();">Contato</span> <a href="#" onclick="navigateTo('contato'); toggleMobileMenu(); return false;" style="background: #C17F3B; color: #1a1a1a;" class="px-5 py-3 rounded-full text-center font-bold mt-4">Orçamento Grátis</a>
+                </div>
+            </div>
+        </div><!-- =================== PÁGINA INÍCIO =================== -->
+        <div id="page-inicio" class="section-page active-page">
+            <!-- HERO -->
+            <section style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2418 100%); padding-top: 80px;" class="relative overflow-hidden">
+                <div class="absolute inset-0 opacity-10">
+                    <div style="background: radial-gradient(circle at 20% 50%, #C17F3B 0%, transparent 50%); height: 100%; width: 100%;"></div>
+                </div>
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-32 relative z-10">
+                    <div class="max-w-3xl">
+                        <div class="anim-slide-right inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6" style="background: rgba(193,127,59,0.15); border: 1px solid rgba(193,127,59,0.3);">
+                            <div class="w-2 h-2 rounded-full" style="background: #C17F3B;"></div><span style="color: #C17F3B;" class="text-sm font-medium">+500 projetos entregues</span>
+                        </div>
+                        <h1 id="hero-title" class="heading-font text-4xl sm:text-5xl lg:text-7xl font-extrabold leading-tight mb-6 anim-slide-right delay-1" style="color: #F5F0E8;">Transformamos Seu<br><span style="color: #C17F3B;">Espaço em Realidade</span></h1>
+                        <p id="hero-subtitle" class="text-lg sm:text-xl mb-10 anim-slide-right delay-2" style="color: #a89e8e; max-width: 540px;">Reformas residenciais e comerciais com qualidade, pontualidade e o melhor custo-benefício do mercado.</p>
+                        <div class="flex flex-wrap gap-4 anim-slide-right delay-3">
+                            <a href="#" onclick="navigateTo('contato'); return false;" style="background: #C17F3B; color: #1a1a1a;" class="px-8 py-4 rounded-full font-bold text-lg hover:opacity-90 transition inline-flex items-center gap-2"> Solicitar Orçamento <i data-lucide="arrow-right" class="w-5 h-5"></i> </a> <a href="#" onclick="navigateTo('servicos'); return false;" style="border: 2px solid #C17F3B; color: #C17F3B;" class="px-8 py-4 rounded-full font-bold text-lg hover:opacity-80 transition"> Ver Serviços </a>
+                        </div>
+                    </div><!-- Stats -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-16 sm:mt-24">
+                        <div class="anim-fade-up delay-3 text-center sm:text-left">
+                            <div class="counter heading-font text-3xl sm:text-4xl font-bold" style="color: #C17F3B;" data-target="500">
+                                0
+                            </div>
+                            <div class="text-sm mt-1" style="color: #a89e8e;">
+                                Projetos Entregues
+                            </div>
+                        </div>
+                        <div class="anim-fade-up delay-4 text-center sm:text-left">
+                            <div class="counter heading-font text-3xl sm:text-4xl font-bold" style="color: #C17F3B;" data-target="15">
+                                0
+                            </div>
+                            <div class="text-sm mt-1" style="color: #a89e8e;">
+                                Anos de Experiência
+                            </div>
+                        </div>
+                        <div class="anim-fade-up delay-5 text-center sm:text-left">
+                            <div class="counter heading-font text-3xl sm:text-4xl font-bold" style="color: #C17F3B;" data-target="98">
+                                0
+                            </div>
+                            <div class="text-sm mt-1" style="color: #a89e8e;">
+                                % Satisfação
+                            </div>
+                        </div>
+                        <div class="anim-fade-up delay-6 text-center sm:text-left">
+                            <div class="counter heading-font text-3xl sm:text-4xl font-bold" style="color: #C17F3B;" data-target="50">
+                                0
+                            </div>
+                            <div class="text-sm mt-1" style="color: #a89e8e;">
+                                Profissionais
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section><!-- ABOUT -->
+            <section style="background: #F5F0E8;" class="py-20 sm:py-28">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid lg:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <span class="anim-fade-up text-sm font-bold tracking-widest uppercase" style="color: #C17F3B;">Sobre Nós</span>
+                            <h2 class="heading-font text-3xl sm:text-4xl font-bold mt-3 mb-6 anim-fade-up delay-1" style="color: #1a1a1a;">Excelência em cada detalhe da sua reforma</h2>
+                            <p class="anim-fade-up delay-2 leading-relaxed mb-6" style="color: #555;">Com mais de 15 anos no mercado, nossa equipe une expertise técnica e sensibilidade estética para entregar reformas que superam expectativas. Do planejamento à entrega, cuidamos de tudo.</p>
+                            <div class="grid grid-cols-2 gap-4 anim-fade-up delay-3">
+                                <div class="flex items-center gap-2">
+                                    <i data-lucide="check-circle" style="color: #C17F3B;" class="w-5 h-5"></i><span class="text-sm" style="color: #333;">Garantia de 5 anos</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <i data-lucide="check-circle" style="color: #C17F3B;" class="w-5 h-5"></i><span class="text-sm" style="color: #333;">Materiais premium</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <i data-lucide="check-circle" style="color: #C17F3B;" class="w-5 h-5"></i><span class="text-sm" style="color: #333;">Prazo cumprido</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <i data-lucide="check-circle" style="color: #C17F3B;" class="w-5 h-5"></i><span class="text-sm" style="color: #333;">Orçamento sem surpresas</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="anim-scale-in delay-2 grid grid-cols-2 gap-4">
+                            <div class="rounded-2xl h-48 sm:h-64" style="background: linear-gradient(135deg, #C17F3B, #d4973f);"></div>
+                            <div class="rounded-2xl h-48 sm:h-64 mt-8" style="background: linear-gradient(135deg, #2d2418, #1a1a1a);"></div>
+                            <div class="rounded-2xl h-48 sm:h-64 -mt-4" style="background: linear-gradient(135deg, #1a1a1a, #3a3020);"></div>
+                            <div class="rounded-2xl h-48 sm:h-64 mt-4" style="background: linear-gradient(135deg, #d4973f, #C17F3B);"></div>
+                        </div>
+                    </div>
+                </div>
+            </section><!-- GALLERY -->
+            <section style="background: #1a1a1a;" class="py-20 sm:py-28">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-14">
+                        <span class="anim-fade-up text-sm font-bold tracking-widest uppercase" style="color: #C17F3B;">Portfólio</span>
+                        <h2 class="heading-font text-3xl sm:text-4xl font-bold mt-3 anim-fade-up delay-1" style="color: #F5F0E8;">Nossos Projetos Recentes</h2>
+                    </div>
+                    <div id="gallery-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                    </div>
+                </div>
+            </section><!-- TESTIMONIALS -->
+            <section style="background: #F5F0E8;" class="py-20 sm:py-28">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-14">
+                        <span class="anim-fade-up text-sm font-bold tracking-widest uppercase" style="color: #C17F3B;">Depoimentos</span>
+                        <h2 class="heading-font text-3xl sm:text-4xl font-bold mt-3 anim-fade-up delay-1" style="color: #1a1a1a;">O que dizem nossos clientes</h2>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="anim-fade-up delay-1 p-8 rounded-2xl" style="background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,0.06);">
+                            <div class="flex gap-1 mb-4">
+                                <i data-lucide="star" class="w-4 h-4 fill-current" style="color: #C17F3B;"></i> <i data-lucide="star" class="w-4 h-4 fill-current" style="color: #C17F3B;"></i> <i data-lucide="star" class="w-4 h-4 fill-current" style="color: #C17F3B;"></i> <i data-lucide="star" class="w-4 h-4 fill-current" style="color: #C17F3B;"></i> <i data-lucide="star" class="w-4 h-4 fill-current" style="color: #C17F3B;"></i>
+                            </div>
+                            <p class="text-sm leading-relaxed mb-4" style="color: #555;">"Reforma impecável! Entregaram antes do prazo e o resultado ficou melhor do que eu imaginava. Super recomendo!"</p>
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold" style="background: #C17F3B; color: #1a1a1a;">
+                                    MC
+                                </div>
+                                <div>
+                                    <div class="text-sm font-bold" style="color: #1a1a1a;">
+                                        Maria Clara
+                                    </div>
+                                    <div class="text-xs" style="color: #999;">
+                                        Reforma Residencial
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="anim-fade-up delay-2 p-8 rounded-2xl" style="background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,0.06);">
+                            <div class="flex gap-1 mb-4">
+                                <i data-lucide="star" class="w-4 h-4 fill-current" style="color: #C17F3B;"></i> <i data-lucide="star" class="w-4 h-4 fill-current" style="color: #C17F3B;"></i> <i data-lucide="star" class="w-4 h-4 fill-current" style="color: #C17F3B;"></i> <i data-lucide="star" class="w-4 h-4 fill-current" style="color: #C17F3B;"></i> <i data-lucide="star" class="w-4 h-4 fill-current" style="color: #C17F3B;"></i>
+                            </div>
+                            <p class="text-sm leading-relaxed mb-4" style="color: #555;">"Profissionais sérios e competentes. A reforma do meu escritório ficou incrível. Equipe muito organizada."</p>
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold" style="background: #C17F3B; color: #1a1a1a;">
+                                    RS
+                                </div>
+                                <div>
+                                    <div class="text-sm font-bold" style="color: #1a1a1a;">
+                                        Roberto Silva
+                                    </div>
+                                    <div class="text-xs" style="color: #999;">
+                                        Reforma Comercial
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="anim-fade-up delay-3 p-8 rounded-2xl" style="background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,0.06);">
+                            <div class="flex gap-1 mb-4">
+                                <i data-lucide="star" class="w-4 h-4 fill-current" style="color: #C17F3B;"></i> <i data-lucide="star" class="w-4 h-4 fill-current" style="color: #C17F3B;"></i> <i data-lucide="star" class="w-4 h-4 fill-current" style="color: #C17F3B;"></i> <i data-lucide="star" class="w-4 h-4 fill-current" style="color: #C17F3B;"></i> <i data-lucide="star" class="w-4 h-4 fill-current" style="color: #C17F3B;"></i>
+                            </div>
+                            <p class="text-sm leading-relaxed mb-4" style="color: #555;">"Terceira vez que contrato e sempre surpreendem. Qualidade top e preço justo. Virou minha empresa de confiança."</p>
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold" style="background: #C17F3B; color: #1a1a1a;">
+                                    AF
+                                </div>
+                                <div>
+                                    <div class="text-sm font-bold" style="color: #1a1a1a;">
+                                        Ana Ferreira
+                                    </div>
+                                    <div class="text-xs" style="color: #999;">
+                                        Reforma Completa
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div><!-- =================== PÁGINA SERVIÇOS =================== -->
+        <div id="page-servicos" class="section-page">
+            <section style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2418 100%); padding-top: 100px;" class="py-20">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <span class="anim-fade-up text-sm font-bold tracking-widest uppercase" style="color: #C17F3B;">O Que Fazemos</span>
+                    <h2 class="heading-font text-4xl sm:text-5xl font-bold mt-3 mb-4 anim-fade-up delay-1" style="color: #F5F0E8;">Nossos Serviços</h2>
+                    <p class="anim-fade-up delay-2 max-w-2xl mx-auto mb-16" style="color: #a89e8e;">Oferecemos soluções completas para transformar qualquer ambiente. Confira nossos principais serviços.</p>
+                </div>
+            </section>
+            <section style="background: #F5F0E8;" class="py-20 sm:py-28">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8" id="services-grid">
+                        <!-- Services injected by JS -->
+                    </div><!-- CTA -->
+                    <div class="anim-fade-up mt-20 text-center p-12 sm:p-16 rounded-3xl" style="background: #1a1a1a;">
+                        <h3 class="heading-font text-2xl sm:text-3xl font-bold mb-4" style="color: #F5F0E8;">Pronto para transformar seu espaço?</h3>
+                        <p class="mb-8" style="color: #a89e8e;">Solicite um orçamento gratuito e sem compromisso.</p><a href="#" onclick="navigateTo('contato'); return false;" style="background: #C17F3B; color: #1a1a1a;" class="inline-flex items-center gap-2 px-8 py-4 rounded-full font-bold text-lg hover:opacity-90 transition"> Falar com Especialista <i data-lucide="arrow-right" class="w-5 h-5"></i> </a>
+                    </div>
+                </div>
+            </section>
+        </div><!-- =================== PÁGINA CONTATO =================== -->
+        <div id="page-contato" class="section-page">
+            <section style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2418 100%); padding-top: 100px;" class="py-20">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <span class="anim-fade-up text-sm font-bold tracking-widest uppercase" style="color: #C17F3B;">Fale Conosco</span>
+                    <h2 class="heading-font text-4xl sm:text-5xl font-bold mt-3 mb-4 anim-fade-up delay-1" style="color: #F5F0E8;">Entre em Contato</h2>
+                    <p class="anim-fade-up delay-2 max-w-2xl mx-auto" style="color: #a89e8e;">Estamos prontos para atender você. Preencha o formulário ou nos encontre no mapa.</p>
+                </div>
+            </section>
+            <section style="background: #F5F0E8;" class="py-20 sm:py-28">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid lg:grid-cols-2 gap-12">
+                        <!-- Form -->
+                        <div class="anim-slide-right">
+                            
+
+                            <form name="orcamento" method="POST" data-netlify="true" class="seu-estilo-atual">
+                                <input type="hidden" name="form-name" value="orcamento">
+
+                                <!-- Honeypot anti-spam -->
+                                <input type="text" name="bot-field" style="display: none;">
+
+                                <label>Nome completo:</label>
+                                <input type="text" name="nome" required placeholder="Seu nome">
+
+                                <label>E-mail:</label>
+                                <input type="email" name="email" required placeholder="seu@email.com">
+
+                                <label>Telefone / WhatsApp:</label>
+                                <input type="tel" name="telefone" required placeholder="(35) 99999-9999">
+
+                                <label>Tipo de serviço:</label>
+                                <select name="servico" required>
+                                    <option value="">Selecione...</option>
+                                    <option value="Reforma Residencial">Reforma Residencial</option>
+                                    <option value="Reforma Comercial">Reforma Comercial</option>
+                                    <option value="Pintura">Pintura</option>
+                                    <option value="Elétrica e Hidráulica">Elétrica e Hidráulica</option>
+                                    <option value="Acabamento">Acabamento</option>
+                                    <option value="Outro">Outro</option>
+                                </select>
+
+                                <label>Mensagem / Descreva seu projeto:</label>
+                                <textarea name="mensagem" rows="6" required placeholder="Descreva seu projeto..."></textarea>
+
+                                <button type="submit">Enviar Solicitação</button>
+                            </form>
+                        </div><!-- Info + Map -->
+                        <div class="anim-fade-up delay-2 space-y-8">
+                            <div class="p-8 rounded-2xl" style="background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,0.06);">
+                                <h3 class="heading-font text-xl font-bold mb-6" style="color: #1a1a1a;">Informações</h3>
+                                <div class="space-y-5">
+                                    <div class="flex items-start gap-4">
+                                        <div class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style="background: rgba(193,127,59,0.15);">
+                                            <i data-lucide="map-pin" style="color: #C17F3B;" class="w-5 h-5"></i>
+                                        </div>
+                                        <div>
+                                            <div class="text-sm font-bold" style="color: #1a1a1a;">
+                                                Endereço
+                                            </div>
+                                            <div id="info-address" class="text-sm" style="color: #777;">
+                                                Av. Paulista, 1000 — São Paulo, SP
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start gap-4">
+                                        <div class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style="background: rgba(193,127,59,0.15);">
+                                            <i data-lucide="phone" style="color: #C17F3B;" class="w-5 h-5"></i>
+                                        </div>
+                                        <div>
+                                            <div class="text-sm font-bold" style="color: #1a1a1a;">
+                                                Telefone
+                                            </div>
+                                            <div id="info-phone" class="text-sm" style="color: #777;">
+                                                (11) 99999-9999
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start gap-4">
+                                        <div class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style="background: rgba(193,127,59,0.15);">
+                                            <i data-lucide="mail" style="color: #C17F3B;" class="w-5 h-5"></i>
+                                        </div>
+                                        <div>
+                                            <div class="text-sm font-bold" style="color: #1a1a1a;">
+                                                E-mail
+                                            </div>
+                                            <div id="info-email" class="text-sm" style="color: #777;">
+                                                contato@reformaspro.com.br
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start gap-4">
+                                        <div class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style="background: rgba(193,127,59,0.15);">
+                                            <i data-lucide="clock" style="color: #C17F3B;" class="w-5 h-5"></i>
+                                        </div>
+                                        <div>
+                                            <div class="text-sm font-bold" style="color: #1a1a1a;">
+                                                Horário
+                                            </div>
+                                            <div class="text-sm" style="color: #777;">
+                                                Seg–Sex: 8h às 18h | Sáb: 8h às 12h
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- Google Map -->
+                            <div class="rounded-2xl overflow-hidden" style="box-shadow: 0 4px 20px rgba(0,0,0,0.06);">
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.1976!2d-46.6546!3d-23.5646!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59c8da0aa315%3A0xd59f9431f2c9776a!2sAv.%20Paulista%20-%20S%C3%A3o%20Paulo!5e0!3m2!1spt-BR!2sbr!4v1700000000000" width="100%" height="300" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa de localização"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div><!-- FOOTER -->
+        <footer style="background: #1a1a1a; border-top: 1px solid rgba(193,127,59,0.2);" class="py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div class="flex items-center gap-2">
+                        <div style="background: #C17F3B;" class="w-8 h-8 rounded-lg flex items-center justify-center">
+                            <i data-lucide="hammer" style="color: #1a1a1a;" class="w-4 h-4"></i>
+                        </div><span id="footer-company" class="heading-font font-bold" style="color: #F5F0E8;">Reformas Pro</span>
+                    </div>
+                    <p class="text-sm" style="color: #777;">© 2024 Reformas Pro. Todos os direitos reservados.</p>
+                </div>
+            </div>
+        </footer><!-- LIGHTBOX -->
+        <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+            <button class="absolute top-6 right-6" style="color: #fff;"><i data-lucide="x" class="w-8 h-8"></i></button> <img id="lightbox-img" src="" alt="Imagem ampliada">
+        </div><!-- WHATSAPP BUTTON --> <a id="whatsapp-float" href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" class="whatsapp-btn" aria-label="WhatsApp">
+            <svg class="relative z-10" width="28" height="28" viewbox="0 0 24 24" fill="white">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+            </svg>
+        </a>
+    </div>
+    <script>
+  // ===== CONFIG & SDK =====
+  const defaultConfig = {
+    company_name: 'Reformas Pro',
+    hero_title: 'Transformamos Seu Espaço em Realidade',
+    hero_subtitle: 'Reformas residenciais e comerciais com qualidade, pontualidade e o melhor custo-benefício do mercado.',
+    whatsapp_number: '5511999999999',
+    contact_email: 'contato@reformaspro.com.br',
+    contact_phone: '(11) 99999-9999',
+    address_text: 'Av. Paulista, 1000 — São Paulo, SP',
+    background_color: '#1a1a1a',
+    surface_color: '#F5F0E8',
+    text_color: '#F5F0E8',
+    primary_action_color: '#C17F3B',
+    secondary_action_color: '#a89e8e',
+    font_family: 'DM Sans',
+    font_size: 16
+  };
+
+  function applyConfig(config) {
+    const c = config;
+    // Text
+    document.getElementById('nav-company').textContent = c.company_name || defaultConfig.company_name;
+    document.getElementById('footer-company').textContent = c.company_name || defaultConfig.company_name;
+    const ht = c.hero_title || defaultConfig.hero_title;
+    document.getElementById('hero-title').innerHTML = ht.replace(/Espaço/, '<br><span style="color:' + (c.primary_action_color || defaultConfig.primary_action_color) + '">Espaço</span>');
+    document.getElementById('hero-subtitle').textContent = c.hero_subtitle || defaultConfig.hero_subtitle;
+    document.getElementById('info-address').textContent = c.address_text || defaultConfig.address_text;
+    document.getElementById('info-phone').textContent = c.contact_phone || defaultConfig.contact_phone;
+    document.getElementById('info-email').textContent = c.contact_email || defaultConfig.contact_email;
+    // WhatsApp
+    const wpNum = c.whatsapp_number || defaultConfig.whatsapp_number;
+    document.getElementById('whatsapp-float').href = 'https://wa.me/' + wpNum;
+    // Font
+    const font = c.font_family || defaultConfig.font_family;
+    document.querySelector('.app-root').style.fontFamily = font + ', sans-serif';
+    // Font size
+    const fs = c.font_size || defaultConfig.font_size;
+    document.querySelector('.app-root').style.fontSize = fs + 'px';
+  }
+
+  if (window.elementSdk) {
+    window.elementSdk.init({
+      defaultConfig,
+      onConfigChange: async (config) => { applyConfig(config); },
+      mapToCapabilities: (config) => ({
+        recolorables: [
+          { get: () => config.background_color || defaultConfig.background_color, set: (v) => { config.background_color = v; window.elementSdk.setConfig({ background_color: v }); }},
+          { get: () => config.surface_color || defaultConfig.surface_color, set: (v) => { config.surface_color = v; window.elementSdk.setConfig({ surface_color: v }); }},
+          { get: () => config.text_color || defaultConfig.text_color, set: (v) => { config.text_color = v; window.elementSdk.setConfig({ text_color: v }); }},
+          { get: () => config.primary_action_color || defaultConfig.primary_action_color, set: (v) => { config.primary_action_color = v; window.elementSdk.setConfig({ primary_action_color: v }); }},
+          { get: () => config.secondary_action_color || defaultConfig.secondary_action_color, set: (v) => { config.secondary_action_color = v; window.elementSdk.setConfig({ secondary_action_color: v }); }}
+        ],
+        borderables: [],
+        fontEditable: {
+          get: () => config.font_family || defaultConfig.font_family,
+          set: (v) => { config.font_family = v; window.elementSdk.setConfig({ font_family: v }); }
+        },
+        fontSizeable: {
+          get: () => config.font_size || defaultConfig.font_size,
+          set: (v) => { config.font_size = v; window.elementSdk.setConfig({ font_size: v }); }
+        }
+      }),
+      mapToEditPanelValues: (config) => new Map([
+        ['company_name', config.company_name || defaultConfig.company_name],
+        ['hero_title', config.hero_title || defaultConfig.hero_title],
+        ['hero_subtitle', config.hero_subtitle || defaultConfig.hero_subtitle],
+        ['whatsapp_number', config.whatsapp_number || defaultConfig.whatsapp_number],
+        ['contact_email', config.contact_email || defaultConfig.contact_email],
+        ['contact_phone', config.contact_phone || defaultConfig.contact_phone],
+        ['address_text', config.address_text || defaultConfig.address_text]
+      ])
+    });
+  }
+
+  // ===== NAVIGATION =====
+  let currentPage = 'inicio';
+  function navigateTo(page) {
+    currentPage = page;
+    document.querySelectorAll('.section-page').forEach(p => p.classList.remove('active-page'));
+    document.getElementById('page-' + page).classList.add('active-page');
+    document.querySelectorAll('.nav-link').forEach(l => {
+      l.classList.toggle('active', l.dataset.page === page);
+      l.style.setProperty('--after-bg', '#C17F3B');
+    });
+    document.getElementById('app-root').scrollTop = 0;
+    // Re-trigger animations
+    setTimeout(initAnimations, 100);
+  }
+
+  // Style nav-link ::after dynamically
+  document.querySelectorAll('.nav-link').forEach(l => {
+    l.style.cssText += '--after-bg: #C17F3B';
+  });
+  const linkStyle = document.createElement('style');
+  linkStyle.textContent = '.nav-link::after { background: #C17F3B; }';
+  document.head.appendChild(linkStyle);
+
+  function toggleMobileMenu() {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  }
+
+  // ===== GALLERY =====
+  const galleryItems = [
+    { title: 'Sala de Estar', color: 'linear-gradient(135deg, #C17F3B, #e8b86d)' },
+    { title: 'Cozinha Moderna', color: 'linear-gradient(135deg, #2d2418, #5a4a32)' },
+    { title: 'Banheiro Luxo', color: 'linear-gradient(135deg, #3a3020, #C17F3B)' },
+    { title: 'Quarto Master', color: 'linear-gradient(135deg, #1a1a1a, #4a3a28)' },
+    { title: 'Escritório', color: 'linear-gradient(135deg, #d4973f, #C17F3B)' },
+    { title: 'Área Gourmet', color: 'linear-gradient(135deg, #5a4a32, #2d2418)' },
+    { title: 'Varanda', color: 'linear-gradient(135deg, #C17F3B, #1a1a1a)' },
+    { title: 'Sala Comercial', color: 'linear-gradient(135deg, #e8b86d, #C17F3B)' },
+    { title: 'Fachada', color: 'linear-gradient(135deg, #4a3a28, #1a1a1a)' },
+    { title: 'Piscina', color: 'linear-gradient(135deg, #2d6a8a, #1a3a4a)' },
+    { title: 'Jardim', color: 'linear-gradient(135deg, #3a6a30, #1a3a18)' },
+    { title: 'Lavanderia', color: 'linear-gradient(135deg, #6a5a4a, #3a2a18)' }
+  ];
+
+  const grid = document.getElementById('gallery-grid');
+  galleryItems.forEach((item, i) => {
+    const d = i < 4 ? i + 1 : (i < 8 ? i - 2 : i - 5);
+    grid.innerHTML += `
+      <div class="gallery-item anim-scale-in delay-${Math.min(d, 8)}" onclick="openLightbox(${i})">
+        <div class="gallery-img flex items-center justify-center" style="background: ${item.color};">
+          <div class="text-center p-4">
+            <i data-lucide="image" class="w-8 h-8 mx-auto mb-2" style="color: rgba(255,255,255,0.7);"></i>
+            <span class="text-sm font-medium" style="color: rgba(255,255,255,0.9);">${item.title}</span>
+          </div>
+        </div>
+      </div>`;
+  });
+
+  // ===== SERVICES =====
+  const services = [
+    { icon: 'home', title: 'Reforma Residencial', desc: 'Transformação completa do seu lar com acabamento impecável e atenção aos detalhes.' },
+    { icon: 'building', title: 'Reforma Comercial', desc: 'Ambientes profissionais que valorizam sua marca e otimizam o fluxo de trabalho.' },
+    { icon: 'paintbrush', title: 'Pintura', desc: 'Pintura interna e externa com tintas de alta qualidade e acabamento perfeito.' },
+    { icon: 'zap', title: 'Elétrica', desc: 'Instalações e manutenções elétricas seguindo todas as normas técnicas.' },
+    { icon: 'droplets', title: 'Hidráulica', desc: 'Encanamento, aquecedores e sistemas hidráulicos com garantia total.' },
+    { icon: 'layers', title: 'Acabamento', desc: 'Pisos, revestimentos, gesso e detalhes que fazem toda a diferença.' }
+  ];
+
+  const sGrid = document.getElementById('services-grid');
+  services.forEach((s, i) => {
+    sGrid.innerHTML += `
+      <div class="service-card anim-fade-up delay-${i + 1}" style="background: #fff;">
+        <div class="w-14 h-14 rounded-xl flex items-center justify-center mb-5" style="background: rgba(193,127,59,0.12);">
+          <i data-lucide="${s.icon}" style="color: #C17F3B;" class="w-7 h-7"></i>
+        </div>
+        <h3 class="heading-font text-lg font-bold mb-3" style="color: #1a1a1a;">${s.title}</h3>
+        <p class="text-sm leading-relaxed" style="color: #777;">${s.desc}</p>
+      </div>`;
+  });
+
+  // ===== LIGHTBOX =====
+  function openLightbox(i) {
+    // Show gradient as placeholder
+    const lb = document.getElementById('lightbox');
+    const img = document.getElementById('lightbox-img');
+    img.style.display = 'none';
+    lb.style.display = 'flex';
+    lb.innerHTML = `
+      <button class="absolute top-6 right-6" style="color: #fff;" onclick="closeLightbox()"><i data-lucide="x" class="w-8 h-8"></i></button>
+      <div class="flex flex-col items-center justify-center">
+        <div style="width: 80vw; max-width: 600px; height: 400px; border-radius: 12px; background: ${galleryItems[i].color};" class="flex items-center justify-center">
+          <span class="heading-font text-2xl font-bold" style="color: rgba(255,255,255,0.9);">${galleryItems[i].title}</span>
+        </div>
+      </div>`;
+    lb.classList.add('show');
+    lucide.createIcons();
+  }
+  function closeLightbox() {
+    const lb = document.getElementById('lightbox');
+    lb.classList.remove('show');
+    lb.style.display = 'none';
+  }
+
+  // ===== FORM =====
+  function handleFormSubmit(e) {
+    e.preventDefault();
+    const btn = document.getElementById('form-submit-btn');
+    btn.textContent = 'Enviando...';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.textContent = 'Enviar Solicitação';
+      btn.disabled = false;
+      document.getElementById('form-success').classList.remove('hidden');
+      e.target.reset();
+      setTimeout(() => document.getElementById('form-success').classList.add('hidden'), 5000);
+    }, 1500);
+  }
+
+  // ===== COUNTER ANIMATION =====
+  function animateCounters() {
+    document.querySelectorAll('.counter').forEach(el => {
+      const target = parseInt(el.dataset.target);
+      const duration = 2000;
+      const start = performance.now();
+      function tick(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.floor(target * eased) + (target === 98 ? '' : '+');
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    });
+  }
+
+  // ===== SCROLL ANIMATIONS =====
+  function initAnimations() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, root: document.getElementById('app-root') });
+
+    document.querySelectorAll('.anim-fade-up, .anim-slide-right, .anim-scale-in').forEach(el => {
+      if (!el.classList.contains('visible')) observer.observe(el);
+    });
+  }
+
+  // ===== INIT =====
+  lucide.createIcons();
+  initAnimations();
+  setTimeout(animateCounters, 500);
+  applyConfig(defaultConfig);
+    </script>
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9e1e0661846cd917',t:'MTc3NDQ0Mjg1NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+</body>
+</html>
